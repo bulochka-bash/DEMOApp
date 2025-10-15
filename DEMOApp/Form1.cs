@@ -39,7 +39,7 @@ namespace DEMOApp
            using(SqlConnection con = new SqlConnection(ConnectionString.conString))
            {
                con.Open();
-                using (SqlCommand cmd = new SqlCommand("select * from users where логин =@log and пароль=@pas",con))
+                using (SqlCommand cmd = new SqlCommand("select * from Пользователи where логин =@log and пароль=@pas",con))
                 {
                     cmd.Parameters.Add("@log",SqlDbType.NVarChar).Value= loginText.Text;
                     cmd.Parameters.Add("@pas", SqlDbType.NVarChar).Value = passwordText.Text;
@@ -118,7 +118,7 @@ namespace DEMOApp
         }
         private void WrongTryToLog(SqlConnection con)
         {
-            using(SqlCommand cmd = new SqlCommand("select * from users where логин=@log", con))
+            using(SqlCommand cmd = new SqlCommand("select * from Пользователи where логин=@log", con))
             {
                 cmd.Parameters.Add("@log", SqlDbType.NVarChar).Value = loginText.Text;
                 using (SqlDataReader reader2 = cmd.ExecuteReader())
@@ -130,7 +130,7 @@ namespace DEMOApp
                             int tries = reader2.GetInt32(reader2.GetOrdinal("количество_неправильных_попыток_входа"));
                             if (IsBlocked(tries, false)) return;
                         }
-                        using (SqlCommand cmd2 = new SqlCommand("update users set количество_неправильных_попыток_входа +=1 where логин =@log ", con))
+                        using (SqlCommand cmd2 = new SqlCommand("update Пользователи set количество_неправильных_попыток_входа +=1 where логин =@log ", con))
                         {
                             reader2.Close();
                             cmd2.Parameters.Add("@log", SqlDbType.NVarChar).Value = loginText.Text;
@@ -152,7 +152,7 @@ namespace DEMOApp
         }
         private void BlockAccountInDB(SqlConnection con,string id)
         {
-            using (SqlCommand cmd = new SqlCommand("update users set isBlocked = 1 where id=@id", con))
+            using (SqlCommand cmd = new SqlCommand("update Пользователи set isBlocked = 1 where id=@id", con))
             {
                 cmd.Parameters.Add("@id", SqlDbType.NVarChar).Value = id;
                 int changedRows = cmd.ExecuteNonQuery();
@@ -163,7 +163,7 @@ namespace DEMOApp
             DateTime inDB = date.AddMonths(1);
             if (inDB > DateTime.Now)
             {
-                //все норм
+                //
             }
             else
             {
@@ -174,7 +174,7 @@ namespace DEMOApp
         
         private void ChangeLastAuthDate(string id,SqlConnection con)
         {
-            using (SqlCommand cmd = new SqlCommand("update users set дата_последнего_захода = @date where id=@id", con))
+            using (SqlCommand cmd = new SqlCommand("update Пользователи set дата_последнего_захода = @date where id=@id", con))
             {
                 cmd.Parameters.Add("@date", SqlDbType.Date).Value = DateTime.Today;
                 cmd.Parameters.Add("@id", SqlDbType.NVarChar).Value = id;

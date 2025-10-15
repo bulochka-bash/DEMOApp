@@ -9,6 +9,7 @@ namespace DEMOApp
 {
     internal class ConnectionString
     {
-        public static string conString = "Data Source=DESKTOP-5GUTLCB\\SQLEXPRESS;Initial Catalog=t;Integrated Security=True;Encrypt=False;MultipleActiveResultSets=True";
+        static string pcName = Environment.MachineName;
+        public static string conString = $"Data Source={pcName}\\SQLEXPRESS;Initial Catalog=Demo;Integrated Security=True;Encrypt=False;MultipleActiveResultSets=True";
     }
 }
