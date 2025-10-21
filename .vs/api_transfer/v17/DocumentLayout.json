@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\user\\source\\repos\\api_transfer\\",
+  "WorkspaceRootPath": "C:\\Users\\user\\source\\repos\\DEMOApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{10A8E865-BA4D-4B76-9893-501F452DF095}|api_transfer\\api_transfer.csproj|c:\\users\\user\\source\\repos\\api_transfer\\api_transfer\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{10A8E865-BA4D-4B76-9893-501F452DF095}|api_transfer\\api_transfer.csproj|c:\\users\\user\\source\\repos\\demoapp\\api_transfer\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{10A8E865-BA4D-4B76-9893-501F452DF095}|api_transfer\\api_transfer.csproj|solutionrelative:api_transfer\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10A8E865-BA4D-4B76-9893-501F452DF095}|api_transfer\\api_transfer.csproj|c:\\users\\user\\source\\repos\\api_transfer\\api_transfer\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{10A8E865-BA4D-4B76-9893-501F452DF095}|api_transfer\\api_transfer.csproj|C:\\Users\\user\\source\\repos\\DEMOApp\\api_transfer\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{10A8E865-BA4D-4B76-9893-501F452DF095}|api_transfer\\api_transfer.csproj|solutionrelative:api_transfer\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -24,11 +24,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\api_transfer\\api_transfer\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\DEMOApp\\api_transfer\\Form1.cs",
               "RelativeDocumentMoniker": "api_transfer\\Form1.cs",
-              "ToolTip": "C:\\Users\\user\\source\\repos\\api_transfer\\api_transfer\\Form1.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\DEMOApp\\api_transfer\\Form1.cs",
               "RelativeToolTip": "api_transfer\\Form1.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAqwCsAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAACsAAAAAAAAAAAAAADwAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-15T08:54:52.596Z",
               "EditorCaption": ""
@@ -37,9 +37,9 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\api_transfer\\api_transfer\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\DEMOApp\\api_transfer\\Form1.cs",
               "RelativeDocumentMoniker": "api_transfer\\Form1.cs",
-              "ToolTip": "C:\\Users\\user\\source\\repos\\api_transfer\\api_transfer\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\DEMOApp\\api_transfer\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "RelativeToolTip": "api_transfer\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-15T08:54:01.975Z",

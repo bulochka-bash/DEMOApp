@@ -37,15 +37,8 @@ namespace api_transfer
             string path = "http://localhost:4444/TransferSimulator/fullName";
             string outputJson = await GetName(path);
             UserName name =  JsonSerializer.Deserialize<UserName>(outputJson);
-            if (IsValidName(name.value))
-            {
-                MessageBox.Show("ФИО верно");
-            }
-            else
-            {
-                MessageBox.Show("ФИО  noверно");
-            }
-            label1.Text = name.value;
+            
+            this.name.Text = name.value;
         }
         private bool IsValidName(string name) 
         {
@@ -68,6 +61,20 @@ namespace api_transfer
             }
             return true;
         }
+
+        private void CheckName_Click(object sender, EventArgs e)
+        {
+            if (IsValidName(name.Text))
+            {
+                MessageBox.Show("ФИО верно","Успех",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("ФИО неверно", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                wrongNameLabel.Text = "ФИО содержит запрещенные символы";
+            }
+        }
+        
     }
     public class UserName
     {
