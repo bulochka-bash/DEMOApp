@@ -39,7 +39,7 @@ namespace DEMOApp
            using(SqlConnection con = new SqlConnection(ConnectionString.conString))
            {
                con.Open();
-                using (SqlCommand cmd = new SqlCommand("select * from users where логин =@log and пароль=@pas",con))
+                using (SqlCommand cmd = new SqlCommand("select * from Пользователи where логин =@log and пароль=@pas",con))
                 {
                     cmd.Parameters.Add("@log",SqlDbType.NVarChar).Value= loginText.Text;
                     cmd.Parameters.Add("@pas", SqlDbType.NVarChar).Value = passwordText.Text;
@@ -55,10 +55,32 @@ namespace DEMOApp
                                     string id = reader.GetValue(reader.GetOrdinal("id")).ToString();
                                     
                                     DateTime lastAuth = reader.GetDateTime(reader.GetOrdinal("дата_последнего_захода"));
-                                    if (CheckLastAuth(lastAuth))
+                                    //if (CheckLastAuth(lastAuth))
+                                    //{
+                                    //    BlockAccountInDB(con, id);
+                                    //    MessageBox.Show("Аккаунт заблокирован потому что вы не заходили более месяца", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    //    return;
+                                    //}
+                                    bool isBlocked = reader.GetBoolean(reader.GetOrdinal("isBlocked"));
+                                    int wrongTriesToLog = reader.GetInt32(reader.GetOrdinal("количество_неправильных_попыток_входа"));
+                                    if (!IsBlocked(wrongTriesToLog, isBlocked))
+                                    {
+
+                                        ChangeLastAuthDate(id, con);
+                                        string role = reader.GetString(reader.GetOrdinal("должность"));
+                                        MessageBox.Show("Все Норм", "Ура!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        if (role.Equals("Администратор"))
+                                        {
+
+                                            string password = reader.GetString(reader.GetOrdinal("пароль"));
+                                            ChangePassword changePassword = new ChangePassword();
+                                            changePassword.GetUserInfo(id, password);
+                                            changePassword.Show();
+                                        }
+                                    }
+                                    else
                                     {
                                         BlockAccountInDB(con, id);
-                                        MessageBox.Show("Аккаунт заблокирован потому что вы не заходили более месяца", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         return;
                                     }
                                     bool isCapthcaSucces = await IsCaptchaSucces();
@@ -68,28 +90,7 @@ namespace DEMOApp
                                         MessageBox.Show("Аккаунт заблокирован потому что вы 3 раза неправильно собрали каптчу", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         return;
                                     }
-                                    bool isBlocked = reader.GetBoolean(reader.GetOrdinal("isBlocked"));
-                                    int wrongTriesToLog = reader.GetInt32(reader.GetOrdinal("количество_неправильных_попыток_входа"));
-                                    if (!IsBlocked(wrongTriesToLog,isBlocked))
-                                    {
-                                            
-                                            ChangeLastAuthDate(id, con);
-                                            string role = reader.GetString(reader.GetOrdinal("должность"));
-                                            MessageBox.Show("Все Норм", "Ура!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                            if (role.Equals("Администратор"))
-                                            {
-
-                                                string password = reader.GetString(reader.GetOrdinal("пароль"));
-                                                ChangePassword changePassword = new ChangePassword();
-                                                changePassword.GetUserInfo(id, password);
-                                                changePassword.Show();
-                                            }
-                                    }
-                                    else
-                                    {
-                                        BlockAccountInDB(con,id);
-                                        return;
-                                    }
+                                    
                                 }
                             }
                             else
@@ -118,7 +119,7 @@ namespace DEMOApp
         }
         private void WrongTryToLog(SqlConnection con)
         {
-            using(SqlCommand cmd = new SqlCommand("select * from users where логин=@log", con))
+            using(SqlCommand cmd = new SqlCommand("select * from Пользователи where логин=@log", con))
             {
                 cmd.Parameters.Add("@log", SqlDbType.NVarChar).Value = loginText.Text;
                 using (SqlDataReader reader2 = cmd.ExecuteReader())
@@ -130,7 +131,7 @@ namespace DEMOApp
                             int tries = reader2.GetInt32(reader2.GetOrdinal("количество_неправильных_попыток_входа"));
                             if (IsBlocked(tries, false)) return;
                         }
-                        using (SqlCommand cmd2 = new SqlCommand("update users set количество_неправильных_попыток_входа +=1 where логин =@log ", con))
+                        using (SqlCommand cmd2 = new SqlCommand("update Пользователи set количество_неправильных_попыток_входа +=1 where логин =@log ", con))
                         {
                             reader2.Close();
                             cmd2.Parameters.Add("@log", SqlDbType.NVarChar).Value = loginText.Text;
@@ -152,7 +153,7 @@ namespace DEMOApp
         }
         private void BlockAccountInDB(SqlConnection con,string id)
         {
-            using (SqlCommand cmd = new SqlCommand("update users set isBlocked = 1 where id=@id", con))
+            using (SqlCommand cmd = new SqlCommand("update Пользователи set isBlocked = 1 where id=@id", con))
             {
                 cmd.Parameters.Add("@id", SqlDbType.NVarChar).Value = id;
                 int changedRows = cmd.ExecuteNonQuery();
@@ -174,7 +175,7 @@ namespace DEMOApp
         
         private void ChangeLastAuthDate(string id,SqlConnection con)
         {
-            using (SqlCommand cmd = new SqlCommand("update users set дата_последнего_захода = @date where id=@id", con))
+            using (SqlCommand cmd = new SqlCommand("update Пользователи set дата_последнего_захода = @date where id=@id", con))
             {
                 cmd.Parameters.Add("@date", SqlDbType.Date).Value = DateTime.Today;
                 cmd.Parameters.Add("@id", SqlDbType.NVarChar).Value = id;
@@ -211,7 +212,7 @@ namespace DEMOApp
 
                 // Устанавливаем размер изображений в ImageList
                 imageList1.ImageSize = new Size(pieceWidth, pieceHeight);
-
+                
                 for (int row = 0; row < rows; row++)
                 {
                     for (int col = 0; col < cols; col++)
