@@ -164,7 +164,7 @@ namespace DEMOApp
             DateTime inDB = date.AddMonths(1);
             if (inDB > DateTime.Now)
             {
-                //все норм
+                //
             }
             else
             {
