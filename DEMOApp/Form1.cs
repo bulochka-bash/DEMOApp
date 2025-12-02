@@ -36,7 +36,7 @@ namespace DEMOApp
                 MessageBox.Show("Заполните все поля", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-           using(SqlConnection con = new SqlConnection(ConnectionString.conString))
+           using(SqlConnection con = ConnectionString.GetConnection())
            {
                con.Open();
                 using (SqlCommand cmd = new SqlCommand("select * from Пользователи where логин =@log and пароль=@pas",con))
@@ -53,19 +53,17 @@ namespace DEMOApp
                                 {
                                     
                                     string id = reader.GetValue(reader.GetOrdinal("id")).ToString();
-                                    
-                                    DateTime lastAuth = reader.GetDateTime(reader.GetOrdinal("дата_последнего_захода"));
-                                    //if (CheckLastAuth(lastAuth))
-                                    //{
-                                    //    BlockAccountInDB(con, id);
-                                    //    MessageBox.Show("Аккаунт заблокирован потому что вы не заходили более месяца", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    //    return;
-                                    //}
                                     bool isBlocked = reader.GetBoolean(reader.GetOrdinal("isBlocked"));
                                     int wrongTriesToLog = reader.GetInt32(reader.GetOrdinal("количество_неправильных_попыток_входа"));
                                     if (!IsBlocked(wrongTriesToLog, isBlocked))
                                     {
-
+                                        bool isCapthcaSucces = await IsCaptchaSucces();
+                                        if (!isCapthcaSucces)
+                                        {
+                                            BlockAccountInDB(con, id);
+                                            MessageBox.Show("Аккаунт заблокирован потому что вы 3 раза неправильно собрали каптчу", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            return;
+                                        }
                                         ChangeLastAuthDate(id, con);
                                         string role = reader.GetString(reader.GetOrdinal("должность"));
                                         MessageBox.Show("Все Норм", "Ура!", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -83,13 +81,7 @@ namespace DEMOApp
                                         BlockAccountInDB(con, id);
                                         return;
                                     }
-                                    bool isCapthcaSucces = await IsCaptchaSucces();
-                                    if (!isCapthcaSucces)
-                                    {
-                                        BlockAccountInDB(con, id);
-                                        MessageBox.Show("Аккаунт заблокирован потому что вы 3 раза неправильно собрали каптчу", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        return;
-                                    }
+                                    
                                     
                                 }
                             }
@@ -129,7 +121,7 @@ namespace DEMOApp
                         while (reader2.Read())
                         {
                             int tries = reader2.GetInt32(reader2.GetOrdinal("количество_неправильных_попыток_входа"));
-                            if (IsBlocked(tries, false)) return;
+                            //if (IsBlocked(tries, false)) return;
                         }
                         using (SqlCommand cmd2 = new SqlCommand("update Пользователи set количество_неправильных_попыток_входа +=1 where логин =@log ", con))
                         {
@@ -311,6 +303,7 @@ namespace DEMOApp
                     }
                     else
                     {
+                        WrongTryToLog(ConnectionString.GetConnection());
                         MessageBox.Show("Каптча собрана неверно", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
@@ -370,11 +363,17 @@ namespace DEMOApp
                 {
                     _isCaptchaSucces = false;
                     _isCaptchaEnded = true;
+                    
                 }
                 _captchaWrongTries++;
             }
         }
 
+        private void OffCapthcaButtons()
+        {
+            checkBtn.Enabled = false;
+            clearBtn.Enabled = false;
+        }
         private void clearBtn_Click(object sender, EventArgs e)
         {
             ClearTable();
@@ -398,6 +397,7 @@ namespace DEMOApp
             panel1.Visible = true;
             panel2.Enabled = false;
             await WaitForCaptcha();
+            OffCapthcaButtons();
             return _isCaptchaSucces;
         }
         async private Task WaitForCaptcha()

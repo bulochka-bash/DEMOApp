@@ -109,7 +109,7 @@
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(12, 248);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(890, 462);
             this.panel1.TabIndex = 5;
@@ -216,7 +216,7 @@
             this.panel2.Controls.Add(this.passwordLabel);
             this.panel2.Controls.Add(this.enterBtn);
             this.panel2.Controls.Add(this.passwordText);
-            this.panel2.Location = new System.Drawing.Point(214, 480);
+            this.panel2.Location = new System.Drawing.Point(140, 25);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(298, 217);
             this.panel2.TabIndex = 6;
@@ -225,7 +225,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1172, 709);
+            this.ClientSize = new System.Drawing.Size(1172, 727);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
