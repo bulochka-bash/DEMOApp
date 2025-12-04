@@ -23,7 +23,7 @@ namespace DEMOApp
             using (SqlConnection con = new SqlConnection(ConnectionString.conString))
             {
                 con.Open();
-                using (SqlCommand cmd = new SqlCommand("select * from users", con))
+                using (SqlCommand cmd = new SqlCommand("select * from Пользователи", con))
                 {
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -45,7 +45,7 @@ namespace DEMOApp
                     connection.Open();
                     DataTable dataTable = new DataTable();
                     dataTable = dataGridView1.DataSource as DataTable;
-                    using (SqlDataAdapter adapter = new SqlDataAdapter("select * from users", connection))
+                    using (SqlDataAdapter adapter = new SqlDataAdapter("select * from Пользователи", connection))
                     {
                         SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adapter);
                         adapter.Update(dataTable);

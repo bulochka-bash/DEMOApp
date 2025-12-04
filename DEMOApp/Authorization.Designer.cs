@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.loginText = new System.Windows.Forms.TextBox();
             this.enterBtn = new System.Windows.Forms.Button();
             this.loginLabel = new System.Windows.Forms.Label();
             this.passwordLabel = new System.Windows.Forms.Label();
             this.passwordText = new System.Windows.Forms.TextBox();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // loginText
@@ -45,7 +46,7 @@
             this.loginText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.loginText.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
             this.loginText.ForeColor = System.Drawing.Color.White;
-            this.loginText.Location = new System.Drawing.Point(39, 45);
+            this.loginText.Location = new System.Drawing.Point(96, 164);
             this.loginText.Name = "loginText";
             this.loginText.Size = new System.Drawing.Size(142, 35);
             this.loginText.TabIndex = 0;
@@ -56,7 +57,7 @@
             this.enterBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.enterBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.enterBtn.ForeColor = System.Drawing.Color.White;
-            this.enterBtn.Location = new System.Drawing.Point(39, 161);
+            this.enterBtn.Location = new System.Drawing.Point(95, 292);
             this.enterBtn.Name = "enterBtn";
             this.enterBtn.Size = new System.Drawing.Size(142, 43);
             this.enterBtn.TabIndex = 1;
@@ -69,7 +70,7 @@
             this.loginLabel.AutoSize = true;
             this.loginLabel.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.loginLabel.ForeColor = System.Drawing.Color.White;
-            this.loginLabel.Location = new System.Drawing.Point(33, 10);
+            this.loginLabel.Location = new System.Drawing.Point(90, 129);
             this.loginLabel.Name = "loginLabel";
             this.loginLabel.Size = new System.Drawing.Size(76, 30);
             this.loginLabel.TabIndex = 2;
@@ -80,7 +81,7 @@
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
             this.passwordLabel.ForeColor = System.Drawing.Color.White;
-            this.passwordLabel.Location = new System.Drawing.Point(34, 89);
+            this.passwordLabel.Location = new System.Drawing.Point(91, 208);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(91, 30);
             this.passwordLabel.TabIndex = 4;
@@ -92,20 +93,15 @@
             this.passwordText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.passwordText.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
             this.passwordText.ForeColor = System.Drawing.Color.White;
-            this.passwordText.Location = new System.Drawing.Point(39, 122);
+            this.passwordText.Location = new System.Drawing.Point(96, 241);
             this.passwordText.Name = "passwordText";
             this.passwordText.Size = new System.Drawing.Size(142, 35);
             this.passwordText.TabIndex = 3;
             // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.panel2.Controls.Add(this.panel1);
             this.panel2.Controls.Add(this.loginLabel);
             this.panel2.Controls.Add(this.loginText);
             this.panel2.Controls.Add(this.passwordLabel);
@@ -114,21 +110,44 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(30, 30);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(224, 251);
+            this.panel2.Size = new System.Drawing.Size(350, 392);
             this.panel2.TabIndex = 6;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(350, 100);
+            this.panel1.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(8, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(337, 65);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Авторизация";
             // 
             // Authorization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(284, 311);
+            this.ClientSize = new System.Drawing.Size(410, 452);
             this.Controls.Add(this.panel2);
             this.Name = "Authorization";
             this.Padding = new System.Windows.Forms.Padding(30);
             this.Text = "Form1";
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -140,8 +159,9 @@
         private System.Windows.Forms.Label loginLabel;
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.TextBox passwordText;
-        private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
     }
 }
 

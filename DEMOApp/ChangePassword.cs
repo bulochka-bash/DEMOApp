@@ -78,7 +78,7 @@ namespace DEMOApp
                 using(SqlConnection con = new SqlConnection(ConnectionString.conString))
                 {
                     con.Open();
-                    using(SqlCommand cmd = new SqlCommand("update users set пароль = @pas where id =@id", con))
+                    using(SqlCommand cmd = new SqlCommand("update Пользователи set пароль = @pas where id =@id", con))
                     {
                         cmd.Parameters.Add("@pas",SqlDbType.NVarChar).Value = newPasText.Text;
                         cmd.Parameters.Add("@id", SqlDbType.NVarChar).Value = _userId;
