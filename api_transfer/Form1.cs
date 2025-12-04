@@ -33,7 +33,7 @@ namespace api_transfer
         }
 
         async private void button1_Click(object sender, EventArgs e)
-        {
+        {/// test
             string path = "http://localhost:4444/TransferSimulator/fullName";
             string outputJson = await GetName(path);
             UserName name =  JsonSerializer.Deserialize<UserName>(outputJson);
