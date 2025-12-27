@@ -11,6 +11,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
+using Microsoft.Office.Interop.Word;
 
 namespace api_transfer
 {
@@ -33,11 +34,11 @@ namespace api_transfer
         }
 
         async private void button1_Click(object sender, EventArgs e)
-        {/// test
+        {
             string path = "http://localhost:4444/TransferSimulator/fullName";
             string outputJson = await GetName(path);
-            UserName name =  JsonSerializer.Deserialize<UserName>(outputJson);
-            
+            UserName name = JsonSerializer.Deserialize<UserName>(outputJson);
+
             this.name.Text = name.value;
         }
         private bool IsValidName(string name) 
@@ -67,12 +68,37 @@ namespace api_transfer
             if (IsValidName(name.Text))
             {
                 MessageBox.Show("ФИО верно","Успех",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                SaveFile();
             }
             else
             {
                 MessageBox.Show("ФИО неверно", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 wrongNameLabel.Text = "ФИО содержит запрещенные символы";
             }
+        }
+        private void SaveFile()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Export To Word";
+            saveFileDialog.Filter = "To Word (Word)|*.docx";
+            saveFileDialog.FileName = "tables";
+            if(saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                CreateWordFile(saveFileDialog.FileName);
+            }
+        }
+        private void CreateWordFile(string fileName)
+        {
+            Microsoft.Office.Interop.Word.Application wordApp = new Microsoft.Office.Interop.Word.Application();
+            Microsoft.Office.Interop.Word.Document wordDocument = wordApp.Documents.Add();
+
+            Microsoft.Office.Interop.Word.Paragraph paragraph =  wordDocument.Paragraphs.Add();
+            Microsoft.Office.Interop.Word.Range range = paragraph.Range;
+
+            range.Text = name.Text;
+            wordDocument.SaveAs2(fileName);
+            wordDocument.Close();
+            wordApp.Quit();
         }
         
     }
